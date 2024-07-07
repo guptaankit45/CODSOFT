@@ -10,7 +10,7 @@ const book = new mongoose.Schema({
         type:String,
         required:true
     },
-    auther:{
+    author:{
         type:String,
         required:true
     },
@@ -18,7 +18,7 @@ const book = new mongoose.Schema({
         type:Number,
         required:true
     },
-    dec:{
+    desc:{
         type:String,
         required:true
     },

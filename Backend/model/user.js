@@ -30,19 +30,19 @@ const user = new mongoose.Schema({
         default:"user",
         enum:["user","admin"],
     },
-    favourites:[{type:mongoose.type.objectId,
+    favourites:[{type: mongoose.Types.ObjectId,
             ref:"books",
         },
     ],
-    cart:[{type:mongoose.type.objectId,
+    cart:[{type: mongoose.Types.ObjectId,
             ref:"books",
         },
     ],
-    orders:[{type:mongoose.type.objectId,
-            ref:"order",
+    orders:[{type: mongoose.Types.ObjectId,
+            ref:"Order",
         },
     ],
 },
 {timestamps:true}
 );
-module.exports = mongoose.model("user")
+module.exports = mongoose.model("User",user)
