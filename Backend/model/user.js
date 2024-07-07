@@ -30,7 +30,9 @@ const user = new mongoose.Schema({
         default:"user",
         enum:["user","admin"],
     },
-    favourites:[{type: mongoose.Types.ObjectId,
+    favourites:[
+        {
+            type: mongoose.Types.ObjectId,
             ref:"books",
         },
     ],
