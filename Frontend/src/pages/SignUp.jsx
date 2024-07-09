@@ -1,22 +1,40 @@
 import React, { useState } from 'react';
+import{Link , useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const SignUp = () => {
-  const [Value,setValue]= useState({
+  const [Values,setValues]= useState({
     username: "",
     email: "",
     password:"",
     address:"",
   });
+  const navigate = useNavigate();
   const change =(e)=>{
     const{name,value} = e.target;
-    setValue({...Value,[name]:value});
+    setValues({...Values,[name]:value});
 
   }
   const submit = async()=>{
     try {
-
+      if(
+        Values.username === ""||
+        Values.email === ""||
+        Values.password === ""||
+        Values.address === ""
+      ){
+        alert("All fields are required")
+      }
+      else{
+        const response = await axios.post(
+          "http://localhost:3000/api/v1/sign-up",
+          Values
+        );
+        alert(response.data.message);
+        navigate("/Login")
+      }
     }catch(error){
-      console.log(error);
+      alert(error.response.data.message);
     }
   }
   return (
@@ -33,7 +51,7 @@ const SignUp = () => {
               placeholder='Username'
               name='username'
               required
-              value={Value.username}
+              value={Values.username}
               onChange={change}
 
             />
@@ -49,7 +67,7 @@ const SignUp = () => {
               placeholder='xyz@gmail.com'
               name='email'
               required
-              value={Value.email}
+              value={Values.email}
               onChange={change}
             />
           </div>
@@ -64,7 +82,7 @@ const SignUp = () => {
               placeholder='password'
               name='password'
               required
-              value={Value.password}
+              value={Values.password}
               onChange={change}
             />
           </div>
@@ -79,7 +97,7 @@ const SignUp = () => {
               placeholder='address'
               name='address'
               required
-              value={Value.address}
+              value={Values.address}
               onChange={change}
             />
           </div>
